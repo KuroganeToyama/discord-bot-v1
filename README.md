@@ -1,0 +1,1 @@
+This is a simple discord bot. Trying to learn about using API via discord.js.
