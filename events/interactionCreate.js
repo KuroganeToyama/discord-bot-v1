@@ -10,6 +10,10 @@ module.exports = {
 				console.error(`No command matching ${interaction.commandName} was found.`);
 				return;
 			}
+
+			if (interaction.commandName == 'cat') {
+				await interaction.deferReply();
+			}
 	
 			try {
 				await command.execute(interaction);
