@@ -11,7 +11,7 @@ module.exports = {
 				return;
 			}
 
-			if (interaction.commandName == 'cat') {
+			if (['cat', 'waifu'].includes(interaction.commandName)) {
 				await interaction.deferReply();
 			}
 	
