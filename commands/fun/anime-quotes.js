@@ -34,7 +34,7 @@ module.exports = {
             await interaction.editReply(`"${json.quote}"\n~ ${json.character}, from ${json.anime} ~`);
         }
         catch (error) {
-            await interaction.editReply("You mistyped something. Please try again");
+            await interaction.editReply("Either you mistyped something or something wrong happened. Please try again");
             return;
         }
     },
