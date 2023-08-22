@@ -7,8 +7,8 @@ module.exports = {
         .setDescription('Random image of cat'),
     
     async execute(interaction) {
-        const catResult = await fetch('https://api.thecatapi.com/v1/images/search');
-        const json = await catResult.json();
+        const response = await fetch('https://api.thecatapi.com/v1/images/search');
+        const json = await response.json();
         await interaction.editReply(json[0].url);
     },
 };
