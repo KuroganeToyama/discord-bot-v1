@@ -9,8 +9,8 @@ module.exports = {
     async execute(interaction) {
         const apiCall = 'https://www.mylittlewallpaper.com/c/touhou/api/v1/random.json';
         //const apiCall = 'https://img.paulzzh.com/touhou/random?type=json';
-        const touhou = await fetch(apiCall);
-        const json = await touhou.json();
+        const response = await fetch(apiCall);
+        const json = await response.json();
         await interaction.editReply(json.result[0].downloadurl);
         //await interaction.editReply(json.url);
     },
