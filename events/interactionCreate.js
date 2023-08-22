@@ -1,4 +1,5 @@
 const { Events } = require('discord.js');
+const APICommands = ['cat', 'waifu', 'touhou', 'advice'];
 
 module.exports = {
 	name: Events.InteractionCreate,
@@ -11,7 +12,7 @@ module.exports = {
 				return;
 			}
 
-			if (['cat', 'waifu', 'touhou', 'advice'].includes(interaction.commandName)) {
+			if (APICommands.includes(interaction.commandName)) {
 				await interaction.deferReply();
 			}
 	
