@@ -19,8 +19,8 @@ module.exports = {
         const safe = interaction.options.getString('safe');
         const tag = interaction.options.getString('tag');
         const apiCall = root.concat(safe, '/', tag);
-        const waifu = await fetch(apiCall);
-        const json = await waifu.json();
+        const response = await fetch(apiCall);
+        const json = await response.json();
         await interaction.editReply(json.url);
     },
 };
