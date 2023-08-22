@@ -13,18 +13,29 @@ module.exports = {
                 .setDescription('Choose a name')),
     
     async execute(interaction) {
-        const root = 'https://animechan.xyz/api/random/';
-        const type = interaction.options.getString('type');
-        const name = interaction.options.getString('name');
-        let apiCall = root;
-        if (type === 'anime') {
-            apiCall = root.concat(type, '?', 'title=', name);
+        try {
+            const root = 'https://animechan.xyz/api/random/';
+            const type = interaction.options.getString('type');
+            const name = interaction.options.getString('name');
+            const createAPICall = (root, type, name) => {
+                if (type === 'anime') {
+                    return root.concat(type, '?', 'title=', name);
+                }
+                else if (type === 'character') {
+                    return root.concat(type, '?', 'name=', name);
+                }
+                else {
+                    return root;
+                }
+            }
+            const apiCall = createAPICall(root, type, name);
+            const response = await fetch(apiCall);
+            const json = await response.json();
+            await interaction.editReply(`"${json.quote}"\n~ ${json.character}, from ${json.anime} ~`);
         }
-        else if (type === 'character') {
-            apiCall = root.concat(type, '?', 'name=', name);
+        catch (error) {
+            await interaction.editReply("You mistyped something. Please try again");
+            return;
         }
-        const response = await fetch(apiCall);
-        const json = await response.json();
-        await interaction.editReply(`"${json.quote}"\n~ ${json.character}, from ${json.anime} ~`);
     },
 };
