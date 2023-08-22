@@ -15,12 +15,18 @@ module.exports = {
                 .setRequired(true)),
     
     async execute(interaction) {
-        const root = 'https://api.waifu.pics/';
-        const safe = interaction.options.getString('safe');
-        const tag = interaction.options.getString('tag');
-        const apiCall = root.concat(safe, '/', tag);
-        const response = await fetch(apiCall);
-        const json = await response.json();
-        await interaction.editReply(json.url);
+        try {
+            const root = 'https://api.waifu.pics/';
+            const safe = interaction.options.getString('safe');
+            const tag = interaction.options.getString('tag');
+            const apiCall = root.concat(safe, '/', tag);
+            const response = await fetch(apiCall);
+            const json = await response.json();
+            await interaction.editReply(json.url);
+        }
+        catch (error) {
+            await interaction.editReply("You mistyped something. Please try again");
+            return;
+        }
     },
 };
