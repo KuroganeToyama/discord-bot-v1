@@ -22,7 +22,8 @@ module.exports = {
             const apiCall = root.concat(safe, '/', tag);
             const response = await fetch(apiCall);
             const json = await response.json();
-            await interaction.editReply(json.url);
+            const image = (safe === 'nsfw') ? (`|| ${json.url} ||`) : (json.url);
+            await interaction.editReply(image);
         }
         catch (error) {
             await interaction.editReply("You mistyped something. Please try again");
