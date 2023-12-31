@@ -12,13 +12,14 @@ module.exports = {
     
     async execute(interaction) {
         try {
+            const user = interaction.user.globalName;
             const channel = interaction.channel;
             const thread = await channel.threads.create({
                 name: interaction.options.getString('name'),
                 autoArchiveDuration: 60,
-                reason: 'Needed a separate thread for resume review',
+                reason: 'Separate thread for resume review',
             });
-            await interaction.editReply(`Created resume thread ${thread.name}`);
+            await interaction.editReply(`Created resume thread **${thread.name}** for **${user}**`);
         }
         catch (error) {
             console.log(error)
