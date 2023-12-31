@@ -1,5 +1,5 @@
 const { Events } = require('discord.js');
-const APICommands = ['cat', 'waifu', 'touhou', 'advice', 'quote'];
+const APICommands = ['cat', 'waifu', 'touhou', 'advice', 'quote', 'cv'];
 
 module.exports = {
 	name: Events.InteractionCreate,
