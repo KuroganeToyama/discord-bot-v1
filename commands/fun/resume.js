@@ -12,6 +12,7 @@ module.exports = {
     
     async execute(interaction) {
         try {
+            const channel = interaction.channel;
             const thread = await channel.threads.create({
                 name: interaction.options.getString('name'),
                 autoArchiveDuration: 60,
@@ -20,6 +21,7 @@ module.exports = {
             await interaction.editReply(`Created resume thread ${thread.name}`);
         }
         catch (error) {
+            console.log(error)
             await interaction.editReply("Unable to create thread.");
             return;
         }
