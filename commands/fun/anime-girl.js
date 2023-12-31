@@ -1,5 +1,18 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fetch = require('node-fetch');
+
+const sfwList = ['waifu', 'neko'];
+let sfwEmbedList = '';
+
+sfwList.forEach((item, index) => {
+    sfwEmbedList += `\`${index + 1}\` ${item}\n`;
+});
+
+const tagsEmbed = new EmbedBuilder()
+	.setColor(0x0099FF)
+	.setTitle('List of tags to use')
+    .setTimestamp()
+    .addFields({ name: 'SFW', value: sfwEmbedList });
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -33,10 +46,13 @@ module.exports = {
                 await interaction.editReply(image);
             }
             else if (interaction.options.getSubcommand() === 'help') {
-                await interaction.editReply("waifu, neko, shinobu, megumin, bully, cuddle");
+                const channel = interaction.channel;
+                await interaction.editReply("Here's your list!");
+                channel.send({ embeds: [tagsEmbed] });
             }
         }
         catch (error) {
+            console.error(error);
             await interaction.editReply("Unable to retrieve image.");
             return;
         }
