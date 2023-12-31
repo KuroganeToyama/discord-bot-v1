@@ -1,5 +1,15 @@
 const { Events } = require('discord.js');
-const APICommands = ['cat', 'waifu', 'touhou', 'advice', 'quote', 'cv'];
+const fs = require('fs');
+
+// Read in the list of commands
+let APICommands = [];
+fs.readFile('events/cmdList.txt', 'utf8', (err, data) => {
+	if (err) {
+	  console.error(err);
+	  return;
+	}
+	APICommands = data.split('\n').map(line => line.trim());
+});
 
 module.exports = {
 	name: Events.InteractionCreate,
